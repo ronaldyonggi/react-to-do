@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 
 const InputTodo = ({setTodos}) => {
@@ -13,7 +14,7 @@ const InputTodo = ({setTodos}) => {
 
   const addTodo = title => {
     const newTodo = {
-      id: Math.floor(Math.random() * 10000),
+      id: uuidv4(),
       title: title,
       completed: false
     }

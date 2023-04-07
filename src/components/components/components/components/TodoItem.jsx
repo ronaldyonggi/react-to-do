@@ -9,6 +9,11 @@ const TodoItem = ({ itemProp, setTodos }) => {
       return todo;
     }))
   }
+
+  const handleDelete = id => {
+    setTodos(prevState => prevState.filter(todo => todo.id !== id ))
+  }
+
   return (
     <li>
       <input 
@@ -16,6 +21,7 @@ const TodoItem = ({ itemProp, setTodos }) => {
       checked={itemProp.completed}
       onChange={() => handleChange(itemProp.id)}
        />
+      <button onClick={() => handleDelete(itemProp.id)}>Delete</button>
       {itemProp.title}
     </li>
   )

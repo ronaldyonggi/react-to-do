@@ -8,7 +8,11 @@ const InputTodo = ({setTodos}) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addTodo(title);
+    // Only add a new todo if the title is not empty
+    if (title.trim()) {
+      addTodo(title);
+    } else alert('Cannot add blank todo!');
+
     setTitle('');
   }
 

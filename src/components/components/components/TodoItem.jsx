@@ -21,8 +21,8 @@ const TodoItem = ({ itemProp, setTodos }) => {
       checked={itemProp.completed}
       onChange={() => handleChange(itemProp.id)}
        />
-      <button onClick={() => handleDelete(itemProp.id)}>Delete</button>
-      {itemProp.title}
+      {' '}{itemProp.title}{' '}
+      <button onClick={() => handleDelete(itemProp.id)}>✖</button>
     </li>
   )
 }

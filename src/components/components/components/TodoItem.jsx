@@ -9,6 +9,25 @@ const TodoItem = ({ itemProp, setTodos }) => {
     textDecoration: 'line-through',
   }
 
+  const [editing, setEditing] = useState(false);
+
+  let viewMode = {};
+  let editMode = {};
+  editing ? viewMode.display = 'none': editMode.display = 'none';
+
+  const handleEditing = () => setEditing(true);
+
+  // Handle input for editing existing todo
+  const handleInputChange = e => {
+    setTodos(prevState => prevState.map(todo => {
+      if (todo.id === itemProp.id) {
+        todo.title = e.target.value
+      }
+      return todo;
+    }))
+  }
+
+  // Handle for adding a new todo
   const handleChange = id => {
     setTodos(prevState => prevState.map(todo => {
       if (todo.id === id) return {
@@ -19,13 +38,19 @@ const TodoItem = ({ itemProp, setTodos }) => {
     }))
   }
 
+  // Handle for deleting todo
   const handleDelete = id => {
     setTodos(prevState => prevState.filter(todo => todo.id !== id ))
   }
 
+  // Handle for pressing Enter after editing a todo
+  const handleUpdatedDone = e => {
+    if (e.key === 'Enter') setEditing(false);
+  }
+
   return (
     <li className={styles.item}>
-      <div className={styles.content}>
+      <div className={styles.content} style={viewMode}>
         <input 
         type="checkbox"
         checked={itemProp.completed}
@@ -41,6 +66,9 @@ const TodoItem = ({ itemProp, setTodos }) => {
         type='text'
         value={itemProp.title}
         className={styles.textInput}
+        style={editMode}
+        onKeyDown={handleUpdatedDone}
+        onChange={handleInputChange}
       />
     </li>
   )

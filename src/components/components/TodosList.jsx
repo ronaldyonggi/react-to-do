@@ -1,4 +1,4 @@
-import TodoItem from "@/components/components/components/components/TodoItem";
+import TodoItem from "@/components/components/components/TodoItem";
 const TodosList = ({todosProps, setTodos}) => {
 
   return (

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import InputTodo from "@/components/components/components/InputTodo";
-import TodosList from '@/components/components/components/TodosList'
+import InputTodo from "@/components/components/InputTodo";
+import TodosList from '@/components/components/TodosList'
 
 const todosData = [
   {

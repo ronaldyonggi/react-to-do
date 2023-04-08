@@ -1,6 +1,13 @@
-import styles from '@/styles/TodoItem.module.css';
+import styles from '@/styles/TodoItem.module.scss';
+import { useState } from 'react';
 
 const TodoItem = ({ itemProp, setTodos }) => {
+  const completedStyle = {
+    fontStyle: 'italic',
+    color: '#595959',
+    opacity: 0.4,
+    textDecoration: 'line-through',
+  }
 
   const handleChange = id => {
     setTodos(prevState => prevState.map(todo => {
@@ -24,9 +31,17 @@ const TodoItem = ({ itemProp, setTodos }) => {
         checked={itemProp.completed}
         onChange={() => handleChange(itemProp.id)}
         />
-        {' '}{itemProp.title}{' '}
-        <button onClick={() => handleDelete(itemProp.id)}>✖</button>
+        <span style={itemProp.completed ? completedStyle : null}>
+          {itemProp.title}
+        </span>
+        <button onClick={handleEditing}>Edit</button>
+        <button onClick={() => handleDelete(itemProp.id)}>Delete</button>
       </div>
+      <input 
+        type='text'
+        value={itemProp.title}
+        className={styles.textInput}
+      />
     </li>
   )
 }

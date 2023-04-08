@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const InputTodo = ({setTodos}) => {
   const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleChange = e => setTitle(e.target.value);
 
@@ -11,7 +12,10 @@ const InputTodo = ({setTodos}) => {
     // Only add a new todo if the title is not empty
     if (title.trim()) {
       addTodo(title);
-    } else alert('Cannot add blank todo!');
+      setMessage('');
+    } else {
+      setMessage('Cannot add blank todo!');
+    }
 
     setTitle('');
   }
@@ -27,15 +31,19 @@ const InputTodo = ({setTodos}) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input 
-      type="text" 
-      placeholder="Add a todo..."
-      value={title}
-      onChange={handleChange}
-      />
-      <input type="submit" />
-    </form>
+    <>
+      <form onSubmit={handleSubmit} className="form-container">
+        <input 
+        type="text" 
+        placeholder="Add a todo..."
+        value={title}
+        onChange={handleChange}
+        className="input-text"
+        />
+        <input className="input-submit" type="submit" />
+      </form>
+      <span className="submit-warning">{message}</span>
+    </>
   )
 }
 
